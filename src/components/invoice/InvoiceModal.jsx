@@ -20,8 +20,8 @@ export const InvoiceModal = ({ isOpen, onClose, sale }) => {
             </div>
             <div>
               <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">PharmaCare Pharmacy Ltd.</h2>
-              <p className="text-xs text-slate-500">100 Healthcare Way, Suite 400 • Phone: +1 (800) 555-PHARMA</p>
-              <p className="text-[11px] text-slate-400">License #: PH-98241-USA • Tax ID: 88-3921049</p>
+              <p className="text-xs text-slate-500">100 Healthcare Way, Suite 400 • Phone: +91 (800) 555-PHARMA</p>
+              <p className="text-[11px] text-slate-400">License #: PH-98241-IND • GST ID: 37AAAAA0000A1Z5</p>
             </div>
           </div>
           <div className="text-right">
@@ -76,9 +76,9 @@ export const InvoiceModal = ({ isOpen, onClose, sale }) => {
                     </span>
                   </td>
                   <td className="py-2.5 px-3 text-center font-bold text-slate-800">{item.quantity}</td>
-                  <td className="py-2.5 px-3 text-right font-mono">${item.unitPrice.toFixed(2)}</td>
+                  <td className="py-2.5 px-3 text-right font-mono">₹{item.unitPrice.toFixed(2)}</td>
                   <td className="py-2.5 px-3 text-right font-bold text-slate-900 font-mono">
-                    ${item.totalPrice.toFixed(2)}
+                    ₹{item.totalPrice.toFixed(2)}
                   </td>
                 </tr>
               ))}
@@ -91,21 +91,21 @@ export const InvoiceModal = ({ isOpen, onClose, sale }) => {
           <div className="w-full sm:w-64 space-y-2 text-xs">
             <div className="flex justify-between text-slate-600">
               <span>Subtotal:</span>
-              <span className="font-mono font-semibold">${sale.subtotal.toFixed(2)}</span>
+              <span className="font-mono font-semibold">₹{sale.subtotal.toFixed(2)}</span>
             </div>
             {sale.discountAmount > 0 && (
               <div className="flex justify-between text-emerald-600">
                 <span>Discount:</span>
-                <span className="font-mono font-semibold">-${sale.discountAmount.toFixed(2)}</span>
+                <span className="font-mono font-semibold">-₹{sale.discountAmount.toFixed(2)}</span>
               </div>
             )}
             <div className="flex justify-between text-slate-600">
-              <span>Est Tax (5%):</span>
-              <span className="font-mono font-semibold">${sale.taxAmount.toFixed(2)}</span>
+              <span>GST Tax (5%):</span>
+              <span className="font-mono font-semibold">₹{sale.taxAmount.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-base font-extrabold text-slate-900 pt-2 border-t border-slate-200">
               <span>Grand Total:</span>
-              <span className="text-pharmacy-700 font-mono">${sale.totalAmount.toFixed(2)}</span>
+              <span className="text-pharmacy-700 font-mono">₹{sale.totalAmount.toFixed(2)}</span>
             </div>
           </div>
         </div>

@@ -74,7 +74,7 @@ export const MedicinesPage = () => {
             <Pill className="w-6 h-6 text-pharmacy-600" /> Medicine Inventory Management
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
-            Complete database of active pharmaceutical catalog, stock levels, pricing, and batch controls.
+            Complete database of active pharmaceutical catalog, stock levels, pricing in Indian Rupees (₹), and batch controls.
           </p>
         </div>
 
@@ -143,7 +143,7 @@ export const MedicinesPage = () => {
               <option value="">All Stock Statuses</option>
               <option value="Available">In Stock Only</option>
               <option value="Low Stock">Low Stock Alert</option>
-              <option value="Out of Stock">Out of Stock</option>
+              <option value="Out of Stock">Out of Stock (0 units)</option>
               <option value="Rx Only">Prescription (Rx) Required</option>
             </select>
           </div>
@@ -163,7 +163,7 @@ export const MedicinesPage = () => {
                 <th className="py-3 px-4">ID</th>
                 <th className="py-3 px-4">Medicine Details</th>
                 <th className="py-3 px-4">Category & Type</th>
-                <th className="py-3 px-4 text-right">Price</th>
+                <th className="py-3 px-4 text-right">Price (₹)</th>
                 <th className="py-3 px-4 text-center">Current Stock</th>
                 <th className="py-3 px-4 text-center">Status</th>
                 <th className="py-3 px-4 text-right">Actions</th>
@@ -201,8 +201,8 @@ export const MedicinesPage = () => {
                     </td>
 
                     <td className="py-3.5 px-4 text-right">
-                      <div className="font-bold text-slate-900 font-mono">${med.sellingPrice.toFixed(2)}</div>
-                      <div className="text-[10px] text-slate-400 font-mono">Cost: ${med.purchasePrice.toFixed(2)}</div>
+                      <div className="font-bold text-slate-900 font-mono">₹{med.sellingPrice.toFixed(2)}</div>
+                      <div className="text-[10px] text-slate-400 font-mono">Cost: ₹{med.purchasePrice.toFixed(2)}</div>
                     </td>
 
                     <td className="py-3.5 px-4 text-center">

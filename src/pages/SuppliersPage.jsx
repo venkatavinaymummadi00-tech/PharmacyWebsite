@@ -119,7 +119,7 @@ export const SuppliersPage = () => {
             <div className="p-3 bg-slate-50 rounded-xl text-xs flex justify-between items-center border border-slate-100">
               <div>
                 <span className="text-[10px] text-slate-400 block uppercase font-bold">Total Purchases</span>
-                <span className="font-mono font-bold text-slate-900">${sup.totalPurchases?.toFixed(2)}</span>
+                <span className="font-mono font-bold text-slate-900">₹{sup.totalPurchases?.toFixed(2)}</span>
               </div>
               <div className="text-right">
                 <span className="text-[10px] text-slate-400 block uppercase font-bold">Last Purchase</span>

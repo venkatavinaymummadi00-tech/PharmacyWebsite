@@ -106,14 +106,14 @@ export const ReportsPage = () => {
             />
             <StatCard
               title="Gross Sales Revenue"
-              value={`$${salesReport.summary.totalRevenue.toFixed(2)}`}
+              value={`₹${salesReport.summary.totalRevenue.toFixed(2)}`}
               subtext="Total billed income"
               icon={DollarSign}
               color="sky"
             />
             <StatCard
               title="Average Bill Value"
-              value={`$${(salesReport.summary.totalSales > 0 ? salesReport.summary.totalRevenue / salesReport.summary.totalSales : 0).toFixed(2)}`}
+              value={`₹${(salesReport.summary.totalSales > 0 ? salesReport.summary.totalRevenue / salesReport.summary.totalSales : 0).toFixed(2)}`}
               subtext="Average order total"
               icon={TrendingUp}
               color="indigo"
@@ -143,8 +143,8 @@ export const ReportsPage = () => {
                       <td className="py-3 px-4 text-slate-500 font-mono">{new Date(s.date).toLocaleDateString()}</td>
                       <td className="py-3 px-4 font-bold text-slate-800">{s.customerName}</td>
                       <td className="py-3 px-4 text-center font-mono font-bold">{s.items.length}</td>
-                      <td className="py-3 px-4 text-right font-mono text-slate-500">${s.taxAmount.toFixed(2)}</td>
-                      <td className="py-3 px-4 text-right font-mono font-bold text-slate-900">${s.totalAmount.toFixed(2)}</td>
+                      <td className="py-3 px-4 text-right font-mono text-slate-500">₹{s.taxAmount.toFixed(2)}</td>
+                      <td className="py-3 px-4 text-right font-mono font-bold text-slate-900">₹{s.totalAmount.toFixed(2)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -174,15 +174,15 @@ export const ReportsPage = () => {
             />
             <StatCard
               title="Purchase Cost Valuation"
-              value={`$${inventoryReport.summary.purchaseValuation.toFixed(2)}`}
+              value={`₹${inventoryReport.summary.purchaseValuation.toFixed(2)}`}
               subtext="Asset acquisition cost"
               icon={DollarSign}
               color="indigo"
             />
             <StatCard
               title="Retail Selling Valuation"
-              value={`$${inventoryReport.summary.retailValuation.toFixed(2)}`}
-              subtext={`Potential profit: $${inventoryReport.summary.potentialProfit.toFixed(2)}`}
+              value={`₹${inventoryReport.summary.retailValuation.toFixed(2)}`}
+              subtext={`Potential profit: ₹${inventoryReport.summary.potentialProfit.toFixed(2)}`}
               icon={TrendingUp}
               color="sky"
             />
@@ -210,10 +210,10 @@ export const ReportsPage = () => {
                       <td className="py-3 px-4 font-mono font-bold text-slate-500">{m.id}</td>
                       <td className="py-3 px-4 font-bold text-slate-800">{m.name}</td>
                       <td className="py-3 px-4 text-center font-mono font-bold text-slate-900">{m.currentStock}</td>
-                      <td className="py-3 px-4 text-right font-mono text-slate-500">${m.purchasePrice.toFixed(2)}</td>
-                      <td className="py-3 px-4 text-right font-mono font-bold text-slate-800">${m.sellingPrice.toFixed(2)}</td>
+                      <td className="py-3 px-4 text-right font-mono text-slate-500">₹{m.purchasePrice.toFixed(2)}</td>
+                      <td className="py-3 px-4 text-right font-mono font-bold text-slate-800">₹{m.sellingPrice.toFixed(2)}</td>
                       <td className="py-3 px-4 text-right font-mono font-bold text-pharmacy-700">
-                        ${(m.currentStock * m.sellingPrice).toFixed(2)}
+                        ₹{(m.currentStock * m.sellingPrice).toFixed(2)}
                       </td>
                     </tr>
                   ))}
@@ -230,21 +230,21 @@ export const ReportsPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
             <StatCard
               title="Total Billed Revenue"
-              value={`$${profitReport.summary.totalRevenue.toFixed(2)}`}
+              value={`₹${profitReport.summary.totalRevenue.toFixed(2)}`}
               subtext="Income from sales"
               icon={DollarSign}
               color="emerald"
             />
             <StatCard
               title="Est. Cost of Goods Sold"
-              value={`$${profitReport.summary.totalCostOfGoods.toFixed(2)}`}
+              value={`₹${profitReport.summary.totalCostOfGoods.toFixed(2)}`}
               subtext="Direct medicine cost"
               icon={Layers}
               color="amber"
             />
             <StatCard
               title="Gross Profit"
-              value={`$${profitReport.summary.grossProfit.toFixed(2)}`}
+              value={`₹${profitReport.summary.grossProfit.toFixed(2)}`}
               subtext="Net income before overhead"
               icon={TrendingUp}
               color="teal"

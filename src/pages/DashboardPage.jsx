@@ -35,12 +35,15 @@ import { StockInModal } from '../components/stock/StockInModal';
 import { MedicineFormModal } from '../components/medicine/MedicineFormModal';
 
 export const DashboardPage = () => {
-  const { metrics, charts, loading } = usePharmacy();
+  const { medicines, metrics, charts, loading } = usePharmacy();
   const navigate = useNavigate();
 
   const [salesTimeframe, setSalesTimeframe] = useState('Weekly');
   const [isStockInModalOpen, setIsStockInModalOpen] = useState(false);
   const [isAddMedModalOpen, setIsAddMedModalOpen] = useState(false);
+  const [selectedRestockMed, setSelectedRestockMed] = useState(null);
+
+  const outOfStockMedicines = medicines.filter(m => m.currentStock === 0);
 
   if (loading || !metrics) {
     return (
@@ -62,7 +65,7 @@ export const DashboardPage = () => {
             Real-Time Pharmacy Dashboard
           </h1>
           <p className="text-xs text-slate-300 mt-1">
-            Automated stock tracking, FEFO batch control, POS sales, and inventory analytics.
+            Automated stock tracking, FEFO batch control, POS sales, and inventory analytics in Indian Rupees (₹).
           </p>
         </div>
 
@@ -88,6 +91,31 @@ export const DashboardPage = () => {
         </div>
       </div>
 
+      {/* Out of Stock Quick Action Dashboard Banner if any item is out of stock */}
+      {outOfStockMedicines.length > 0 && (
+        <div className="bg-rose-50 border border-rose-200 p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs">
+          <div className="flex items-start gap-3">
+            <div className="p-2 rounded-xl bg-rose-600 text-white shrink-0 mt-0.5">
+              <AlertCircle className="w-5 h-5" />
+            </div>
+            <div>
+              <span className="font-extrabold text-rose-900 text-sm">
+                Out of Stock Alert ({outOfStockMedicines.length} Medicines Unavailable)
+              </span>
+              <p className="text-slate-600 mt-0.5">
+                The following medicines have 0 inventory units: <strong>{outOfStockMedicines.map(m => m.name).join(', ')}</strong>. Restock immediately to prevent lost sales.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => navigate('/inventory/out-of-stock')}
+            className="flex items-center gap-1.5 px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl shadow-xs transition-colors shrink-0"
+          >
+            Manage Out of Stock <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      )}
+
       {/* 9 Metric Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <StatCard
@@ -108,7 +136,7 @@ export const DashboardPage = () => {
         />
         <StatCard
           title="Today's Revenue"
-          value={`$${metrics.todayRevenue.toFixed(2)}`}
+          value={`₹${metrics.todayRevenue.toFixed(2)}`}
           subtext={`${metrics.todaySalesCount} sales transactions today`}
           icon={DollarSign}
           color="sky"
@@ -116,7 +144,7 @@ export const DashboardPage = () => {
         />
         <StatCard
           title="Today's Purchases"
-          value={`$${metrics.todayPurchasesCost.toFixed(2)}`}
+          value={`₹${metrics.todayPurchasesCost.toFixed(2)}`}
           subtext="Incoming inventory cost"
           icon={TrendingUp}
           color="indigo"
@@ -133,7 +161,7 @@ export const DashboardPage = () => {
         <StatCard
           title="Out of Stock"
           value={metrics.outOfStockCount}
-          subtext="0 units available"
+          subtext="0 units available (Click to view)"
           icon={AlertCircle}
           color="rose"
           onClick={() => navigate('/inventory/out-of-stock')}
@@ -162,7 +190,7 @@ export const DashboardPage = () => {
         <div className="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-slate-800">Pharmacy Sales Performance</h3>
+              <h3 className="text-base font-bold text-slate-800">Pharmacy Sales Performance (₹)</h3>
               <p className="text-xs text-slate-500">Daily sales revenue and transaction volume trends</p>
             </div>
             <div className="flex bg-slate-100 p-1 rounded-xl text-xs font-semibold">
@@ -193,6 +221,7 @@ export const DashboardPage = () => {
                 <XAxis dataKey="name" stroke="#94a3b8" fontSize={11} tickLine={false} />
                 <YAxis stroke="#94a3b8" fontSize={11} tickLine={false} />
                 <Tooltip
+                  formatter={(value) => [`₹${value}`, 'Revenue']}
                   contentStyle={{ backgroundColor: '#0f172a', borderRadius: '12px', color: '#fff', fontSize: '12px' }}
                 />
                 <Area type="monotone" dataKey="revenue" stroke="#0d9488" strokeWidth={3} fillOpacity={1} fill="url(#colorRevenue)" />
@@ -239,8 +268,8 @@ export const DashboardPage = () => {
               <span className="text-slate-500 block text-[10px]">Low Stock</span>
               <span className="font-bold text-amber-700">{charts?.inventory[1]?.value || 0} SKUs</span>
             </div>
-            <div className="p-2 bg-rose-50 rounded-lg">
-              <span className="text-slate-500 block text-[10px]">Out of Stock</span>
+            <div className="p-2 bg-rose-50 rounded-lg cursor-pointer hover:bg-rose-100 transition-colors" onClick={() => navigate('/inventory/out-of-stock')}>
+              <span className="text-rose-600 font-bold block text-[10px]">Out of Stock</span>
               <span className="font-bold text-rose-700">{charts?.inventory[2]?.value || 0} SKUs</span>
             </div>
           </div>
@@ -276,7 +305,7 @@ export const DashboardPage = () => {
       </div>
 
       {/* Modals */}
-      <StockInModal isOpen={isStockInModalOpen} onClose={() => setIsStockInModalOpen(false)} />
+      <StockInModal isOpen={isStockInModalOpen || !!selectedRestockMed} onClose={() => { setIsStockInModalOpen(false); setSelectedRestockMed(null); }} selectedMedicine={selectedRestockMed} />
       <MedicineFormModal isOpen={isAddMedModalOpen} onClose={() => setIsAddMedModalOpen(false)} />
     </div>
   );

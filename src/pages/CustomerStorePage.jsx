@@ -143,7 +143,7 @@ export const CustomerStorePage = () => {
               <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
                 <div>
                   <span className="text-xs text-slate-400 block font-medium">Price</span>
-                  <span className="text-lg font-black text-pharmacy-700 font-mono">${med.sellingPrice.toFixed(2)}</span>
+                  <span className="text-lg font-black text-pharmacy-700 font-mono">₹{med.sellingPrice.toFixed(2)}</span>
                 </div>
 
                 <div className="flex gap-1.5">

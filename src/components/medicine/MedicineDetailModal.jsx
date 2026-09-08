@@ -37,7 +37,7 @@ export const MedicineDetailModal = ({ isOpen, onClose, medicine }) => {
           </div>
 
           <div className="text-left sm:text-right bg-white/10 p-3 rounded-xl backdrop-blur-xs">
-            <div className="text-2xl font-black text-emerald-400 font-mono">${medicine.sellingPrice?.toFixed(2)}</div>
+            <div className="text-2xl font-black text-emerald-400 font-mono">₹{medicine.sellingPrice?.toFixed(2)}</div>
             <div className="mt-1">
               <StatusBadge status={medicine.status} />
             </div>

@@ -21,7 +21,7 @@ export const CartDrawer = () => {
   const [customerDetails, setCustomerDetails] = useState({
     name: 'Sarah Jenkins',
     email: 'sarah.j@example.com',
-    phone: '+1 (555) 345-6789',
+    phone: '+91 98765 43210',
     address: '404 Oakwood Avenue, Suite 12B',
     paymentMethod: 'Cash on Delivery',
   });
@@ -131,7 +131,7 @@ export const CartDrawer = () => {
                             </span>
                           )}
                         </div>
-                        <div className="text-xs text-slate-500 font-mono">${item.price.toFixed(2)} / unit</div>
+                        <div className="text-xs text-slate-500 font-mono">₹{item.price.toFixed(2)} / unit</div>
                       </div>
 
                       <div className="flex items-center gap-2">
@@ -218,7 +218,8 @@ export const CartDrawer = () => {
                         className="w-full p-2 bg-slate-50 border border-slate-300 rounded-lg"
                       >
                         <option value="Cash on Delivery">Cash on Delivery</option>
-                        <option value="Online Card">Credit Card</option>
+                        <option value="UPI / GPay / PhonePe">UPI / Online</option>
+                        <option value="Credit Card">Credit Card</option>
                       </select>
                     </div>
                   </div>
@@ -238,15 +239,15 @@ export const CartDrawer = () => {
                   <div className="p-3 bg-slate-50 rounded-xl space-y-1.5 font-mono text-xs">
                     <div className="flex justify-between text-slate-600">
                       <span>Subtotal:</span>
-                      <span>${subtotal.toFixed(2)}</span>
+                      <span>₹{subtotal.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between text-slate-600">
-                      <span>Estimated Tax (5%):</span>
-                      <span>${tax.toFixed(2)}</span>
+                      <span>Estimated GST (5%):</span>
+                      <span>₹{tax.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between text-sm font-bold text-slate-900 pt-1 border-t border-slate-200">
                       <span>Total Amount:</span>
-                      <span className="text-pharmacy-700">${total.toFixed(2)}</span>
+                      <span className="text-pharmacy-700">₹{total.toFixed(2)}</span>
                     </div>
                   </div>
 

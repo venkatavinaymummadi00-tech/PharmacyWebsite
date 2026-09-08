@@ -155,7 +155,7 @@ export const SalesPOSPage = () => {
             <ShoppingCart className="w-6 h-6 text-pharmacy-600" /> Point of Sale (POS) Billing Terminal
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
-            Fast billing counter with automatic FEFO stock deduction, tax/discount calculation, and print invoices.
+            Fast billing counter with automatic FEFO stock deduction, GST tax/discount calculation, and print invoices in Indian Rupees (₹).
           </p>
         </div>
       </div>
@@ -211,7 +211,7 @@ export const SalesPOSPage = () => {
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="font-bold text-pharmacy-700 font-mono">${med.sellingPrice.toFixed(2)}</div>
+                        <div className="font-bold text-pharmacy-700 font-mono">₹{med.sellingPrice.toFixed(2)}</div>
                         <div
                           className={`text-[10px] font-bold ${
                             med.currentStock === 0
@@ -253,7 +253,7 @@ export const SalesPOSPage = () => {
                     <div className="text-[10px] text-slate-500 truncate">{med.genericName}</div>
                   </div>
                   <div className="flex justify-between items-end">
-                    <span className="font-bold text-pharmacy-700 font-mono text-xs">${med.sellingPrice.toFixed(2)}</span>
+                    <span className="font-bold text-pharmacy-700 font-mono text-xs">₹{med.sellingPrice.toFixed(2)}</span>
                     <span className={`text-[10px] font-bold ${med.currentStock === 0 ? 'text-rose-600' : 'text-slate-500'}`}>
                       {med.currentStock} left
                     </span>
@@ -299,7 +299,7 @@ export const SalesPOSPage = () => {
                           <span className="text-[8px] bg-indigo-100 text-indigo-700 px-1 py-0.2 rounded font-bold">Rx</span>
                         )}
                       </div>
-                      <div className="text-[10px] text-slate-400 font-mono">${item.unitPrice.toFixed(2)}</div>
+                      <div className="text-[10px] text-slate-400 font-mono">₹{item.unitPrice.toFixed(2)}</div>
                     </div>
 
                     <div className="flex items-center gap-2">
@@ -312,7 +312,7 @@ export const SalesPOSPage = () => {
                         className="w-12 p-1 text-center bg-slate-50 border border-slate-300 rounded font-bold font-mono text-xs"
                       />
                       <span className="w-14 text-right font-bold text-slate-900 font-mono">
-                        ${(item.unitPrice * item.quantity).toFixed(2)}
+                        ₹{(item.unitPrice * item.quantity).toFixed(2)}
                       </span>
                       <button
                         onClick={() => handleRemoveItem(item.medicineId)}
@@ -342,7 +342,7 @@ export const SalesPOSPage = () => {
                   <label className="block text-slate-500 font-semibold mb-0.5">Phone Number</label>
                   <input
                     type="text"
-                    placeholder="e.g. +1 555-0192"
+                    placeholder="e.g. +91 98765 43210"
                     value={customerPhone}
                     onChange={(e) => setCustomerPhone(e.target.value)}
                     className="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
@@ -380,8 +380,8 @@ export const SalesPOSPage = () => {
                     className="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
                   >
                     <option value="Cash">Cash</option>
+                    <option value="UPI / PhonePe / GPay">UPI / Online</option>
                     <option value="Card">Card</option>
-                    <option value="UPI / Online">Digital</option>
                   </select>
                 </div>
               </div>
@@ -393,21 +393,21 @@ export const SalesPOSPage = () => {
             <div className="space-y-1.5 font-mono text-xs text-slate-600">
               <div className="flex justify-between">
                 <span>Subtotal:</span>
-                <span>${subtotal.toFixed(2)}</span>
+                <span>₹{subtotal.toFixed(2)}</span>
               </div>
               {discountAmount > 0 && (
                 <div className="flex justify-between text-emerald-600">
                   <span>Discount ({discountPercent}%):</span>
-                  <span>-${discountAmount.toFixed(2)}</span>
+                  <span>-₹{discountAmount.toFixed(2)}</span>
                 </div>
               )}
               <div className="flex justify-between">
-                <span>Tax ({taxPercent}%):</span>
-                <span>${taxAmount.toFixed(2)}</span>
+                <span>GST Tax ({taxPercent}%):</span>
+                <span>₹{taxAmount.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-base font-extrabold text-slate-900 pt-2 border-t border-slate-200">
                 <span>Grand Total:</span>
-                <span className="text-pharmacy-700">${grandTotal.toFixed(2)}</span>
+                <span className="text-pharmacy-700">₹{grandTotal.toFixed(2)}</span>
               </div>
             </div>
 

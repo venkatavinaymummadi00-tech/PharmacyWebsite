@@ -63,7 +63,7 @@ export const OrdersPage = () => {
 
               <div className="text-left sm:text-right">
                 <span className="text-xs text-slate-400 block font-medium">Total Amount</span>
-                <span className="text-lg font-black text-slate-900 font-mono">${ord.totalAmount.toFixed(2)}</span>
+                <span className="text-lg font-black text-slate-900 font-mono">₹{ord.totalAmount.toFixed(2)}</span>
               </div>
             </div>
 
@@ -118,7 +118,7 @@ export const OrdersPage = () => {
                       )}
                     </div>
                     <div className="font-mono text-slate-700">
-                      {item.quantity} x ${item.price?.toFixed(2)} = <strong className="text-slate-900">${(item.quantity * item.price).toFixed(2)}</strong>
+                      {item.quantity} x ₹{item.price?.toFixed(2)} = <strong className="text-slate-900">₹{(item.quantity * item.price).toFixed(2)}</strong>
                     </div>
                   </div>
                 ))}

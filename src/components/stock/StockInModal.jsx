@@ -11,7 +11,7 @@ export const StockInModal = ({ isOpen, onClose, selectedMedicine = null }) => {
     supplierId: selectedMedicine?.supplierId || (suppliers[0]?.id || ''),
     batchNumber: `BATCH-${Date.now().toString().slice(-4)}`,
     quantity: 50,
-    purchasePrice: selectedMedicine?.purchasePrice || 2.50,
+    purchasePrice: selectedMedicine?.purchasePrice || 25.00,
     mfgDate: new Date().toISOString().slice(0, 10),
     expiryDate: '2027-12-31',
     invoiceNumber: `INV-SUP-${Date.now().toString().slice(-4)}`,
@@ -141,14 +141,14 @@ export const StockInModal = ({ isOpen, onClose, selectedMedicine = null }) => {
           </div>
 
           <div>
-            <label className="block font-bold text-slate-700 mb-1">Unit Purchase Price ($)</label>
+            <label className="block font-bold text-slate-700 mb-1">Unit Purchase Price (₹)</label>
             <input
               type="number"
               step="0.01"
               name="purchasePrice"
               value={formData.purchasePrice}
               onChange={handleChange}
-              className="w-full p-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-pharmacy-500"
+              className="w-full p-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-pharmacy-500 font-mono"
             />
           </div>
 
@@ -191,7 +191,7 @@ export const StockInModal = ({ isOpen, onClose, selectedMedicine = null }) => {
 
         <div className="pt-2 text-right">
           <div className="text-xs text-slate-500">
-            Total Purchase Value: <strong className="text-slate-900 font-mono text-sm">${(Number(formData.quantity) * Number(formData.purchasePrice)).toFixed(2)}</strong>
+            Total Purchase Value: <strong className="text-slate-900 font-mono text-sm">₹{(Number(formData.quantity) * Number(formData.purchasePrice)).toFixed(2)}</strong>
           </div>
         </div>
 

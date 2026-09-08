@@ -9,7 +9,7 @@ export const SettingsPage = () => {
     email: 'info@pharmacare.com',
     licenseNo: 'PH-98241-USA',
     taxId: '88-3921049',
-    currencySymbol: '$',
+    currencySymbol: '₹',
     enableOnlineOrders: true,
     requireRxVerification: true,
   });

@@ -21,8 +21,8 @@ export const MedicineFormModal = ({ isOpen, onClose, medicineToEdit = null }) =>
     manufacturer: '',
     supplierId: suppliers[0]?.id || '',
     supplierName: suppliers[0]?.companyName || '',
-    purchasePrice: 1.00,
-    sellingPrice: 3.00,
+    purchasePrice: 15.00,
+    sellingPrice: 45.00,
     currentStock: 50,
     minStockLevel: 15,
     maxStockLevel: 200,
@@ -76,8 +76,8 @@ export const MedicineFormModal = ({ isOpen, onClose, medicineToEdit = null }) =>
         manufacturer: '',
         supplierId: suppliers[0]?.id || '',
         supplierName: suppliers[0]?.companyName || '',
-        purchasePrice: 1.00,
-        sellingPrice: 3.00,
+        purchasePrice: 15.00,
+        sellingPrice: 45.00,
         currentStock: 50,
         minStockLevel: 15,
         maxStockLevel: 200,
@@ -246,26 +246,26 @@ export const MedicineFormModal = ({ isOpen, onClose, medicineToEdit = null }) =>
 
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
             <div>
-              <label className="block font-bold text-slate-700 mb-1">Purchase Price ($)</label>
+              <label className="block font-bold text-slate-700 mb-1">Purchase Price (₹)</label>
               <input
                 type="number"
                 step="0.01"
                 name="purchasePrice"
                 value={formData.purchasePrice}
                 onChange={handleChange}
-                className="w-full p-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-pharmacy-500"
+                className="w-full p-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-pharmacy-500 font-mono"
               />
             </div>
 
             <div>
-              <label className="block font-bold text-slate-700 mb-1">Selling Price ($)</label>
+              <label className="block font-bold text-slate-700 mb-1">Selling Price (₹)</label>
               <input
                 type="number"
                 step="0.01"
                 name="sellingPrice"
                 value={formData.sellingPrice}
                 onChange={handleChange}
-                className="w-full p-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-pharmacy-500"
+                className="w-full p-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-pharmacy-500 font-mono"
               />
             </div>
 
@@ -277,7 +277,7 @@ export const MedicineFormModal = ({ isOpen, onClose, medicineToEdit = null }) =>
                 value={formData.currentStock}
                 onChange={handleChange}
                 disabled={!!medicineToEdit}
-                className="w-full p-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-pharmacy-500 disabled:bg-slate-100"
+                className="w-full p-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-pharmacy-500 disabled:bg-slate-100 font-mono"
               />
             </div>
 
@@ -288,7 +288,7 @@ export const MedicineFormModal = ({ isOpen, onClose, medicineToEdit = null }) =>
                 name="minStockLevel"
                 value={formData.minStockLevel}
                 onChange={handleChange}
-                className="w-full p-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-pharmacy-500"
+                className="w-full p-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-pharmacy-500 font-mono"
               />
             </div>
           </div>
@@ -303,7 +303,7 @@ export const MedicineFormModal = ({ isOpen, onClose, medicineToEdit = null }) =>
                   value={formData.batchNumber}
                   onChange={handleChange}
                   placeholder="e.g. BATCH-2026A"
-                  className="w-full p-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-pharmacy-500"
+                  className="w-full p-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-pharmacy-500 font-mono"
                 />
               </div>
 
@@ -314,7 +314,7 @@ export const MedicineFormModal = ({ isOpen, onClose, medicineToEdit = null }) =>
                   name="expiryDate"
                   value={formData.expiryDate}
                   onChange={handleChange}
-                  className="w-full p-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-pharmacy-500"
+                  className="w-full p-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-pharmacy-500 font-mono"
                 />
               </div>
 

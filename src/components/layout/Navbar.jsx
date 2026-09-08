@@ -124,7 +124,7 @@ export const Navbar = ({ onToggleSidebar }) => {
                       <div className="text-xs text-slate-500">{med.genericName} • {med.brandName}</div>
                     </div>
                     <div className="text-right">
-                      <span className="text-sm font-bold text-pharmacy-700">${med.sellingPrice.toFixed(2)}</span>
+                      <span className="text-sm font-bold text-pharmacy-700">₹{med.sellingPrice.toFixed(2)}</span>
                       <div className={`text-[11px] font-semibold ${med.currentStock === 0 ? 'text-rose-600' : (med.currentStock <= med.minStockLevel ? 'text-amber-600' : 'text-emerald-600')}`}>
                         {med.currentStock} in stock
                       </div>

@@ -49,7 +49,7 @@ export const PurchasesPage = () => {
                   <td className="py-3.5 px-4 font-bold text-slate-800">{p.supplierName}</td>
                   <td className="py-3.5 px-4 text-center font-bold text-slate-700">{p.items.length} item types</td>
                   <td className="py-3.5 px-4 text-right font-mono font-extrabold text-slate-900">
-                    ${p.totalAmount.toFixed(2)}
+                    ₹{p.totalAmount.toFixed(2)}
                   </td>
                   <td className="py-3.5 px-4 text-center">
                     <span className="px-2.5 py-1 text-[10px] font-bold bg-emerald-100 text-emerald-700 rounded-full">

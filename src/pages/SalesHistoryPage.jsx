@@ -80,7 +80,7 @@ export const SalesHistoryPage = () => {
                   <td className="py-3.5 px-4 text-slate-600">{s.soldBy || 'Pharmacist'}</td>
                   <td className="py-3.5 px-4 text-center font-bold font-mono">{s.items.length} items</td>
                   <td className="py-3.5 px-4 text-right font-mono font-extrabold text-slate-900">
-                    ${s.totalAmount.toFixed(2)}
+                    ₹{s.totalAmount.toFixed(2)}
                   </td>
                   <td className="py-3.5 px-4 text-center">
                     <span className="px-2 py-0.5 text-[10px] font-bold bg-slate-100 text-slate-700 rounded">

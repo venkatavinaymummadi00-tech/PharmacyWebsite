@@ -263,7 +263,7 @@ class DataStore {
 
     this.sales.unshift(newSale);
 
-    this.addAuditLog(soldBy, 'Sale Completed', invoiceNumber, `Completed sale of $${totalAmount.toFixed(2)} to ${newSale.customerName}`, 'Pending', 'Completed');
+    this.addAuditLog(soldBy, 'Sale Completed', invoiceNumber, `Completed sale of ₹${totalAmount.toFixed(2)} to ${newSale.customerName}`, 'Pending', 'Completed');
     return newSale;
   }
 
@@ -451,13 +451,13 @@ class DataStore {
   // Chart data generation
   getSalesChartData() {
     return [
-      { name: 'Mon', sales: 450, revenue: 1200 },
-      { name: 'Tue', sales: 620, revenue: 1650 },
-      { name: 'Wed', sales: 380, revenue: 980 },
-      { name: 'Thu', sales: 740, revenue: 2100 },
-      { name: 'Fri', sales: 890, revenue: 2450 },
-      { name: 'Sat', sales: 1100, revenue: 3100 },
-      { name: 'Sun', sales: 950, revenue: 2750 }
+      { name: 'Mon', sales: 450, revenue: 12000 },
+      { name: 'Tue', sales: 620, revenue: 16500 },
+      { name: 'Wed', sales: 380, revenue: 9800 },
+      { name: 'Thu', sales: 740, revenue: 21000 },
+      { name: 'Fri', sales: 890, revenue: 24500 },
+      { name: 'Sat', sales: 1100, revenue: 31000 },
+      { name: 'Sun', sales: 950, revenue: 27500 }
     ];
   }
 
