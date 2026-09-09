@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { PharmacyProvider } from './context/PharmacyContext';
 import { CartProvider } from './context/CartContext';
 
 import { Navbar } from './components/layout/Navbar';
 import { Sidebar } from './components/layout/Sidebar';
 
+import { LoginPage } from './pages/LoginPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { MedicinesPage } from './pages/MedicinesPage';
 import { StockInPage } from './pages/StockInPage';
@@ -26,51 +27,70 @@ import { NotificationsPage } from './pages/NotificationsPage';
 import { AuditLogsPage } from './pages/AuditLogsPage';
 import { SettingsPage } from './pages/SettingsPage';
 
-export function App() {
+// Redirects unauthenticated users to /login
+function ProtectedRoute({ children }) {
+  const { firebaseUser } = useAuth();
+  if (!firebaseUser) return <Navigate to="/login" replace />;
+  return children;
+}
+
+// Main app shell — navbar + sidebar + all protected routes
+function AppShell() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans">
+      <Navbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+
+      <div className="flex-1 flex">
+        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+
+        <main className="flex-1 lg:pl-64 p-4 lg:p-8 transition-all duration-300">
+          <Routes>
+            <Route path="/" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+            <Route path="/inventory" element={<ProtectedRoute><MedicinesPage /></ProtectedRoute>} />
+            <Route path="/inventory/add" element={<ProtectedRoute><MedicinesPage /></ProtectedRoute>} />
+            <Route path="/inventory/stock-in" element={<ProtectedRoute><StockInPage /></ProtectedRoute>} />
+            <Route path="/inventory/low-stock" element={<ProtectedRoute><LowStockPage /></ProtectedRoute>} />
+            <Route path="/inventory/out-of-stock" element={<ProtectedRoute><MedicinesPage /></ProtectedRoute>} />
+            <Route path="/inventory/expiring-soon" element={<ProtectedRoute><ExpiringSoonPage /></ProtectedRoute>} />
+            <Route path="/inventory/expired" element={<ProtectedRoute><ExpiredPage /></ProtectedRoute>} />
+
+            <Route path="/sales/pos" element={<ProtectedRoute><SalesPOSPage /></ProtectedRoute>} />
+            <Route path="/sales/history" element={<ProtectedRoute><SalesHistoryPage /></ProtectedRoute>} />
+
+            <Route path="/purchases" element={<ProtectedRoute><PurchasesPage /></ProtectedRoute>} />
+            <Route path="/suppliers" element={<ProtectedRoute><SuppliersPage /></ProtectedRoute>} />
+            <Route path="/categories" element={<ProtectedRoute><CategoriesPage /></ProtectedRoute>} />
+
+            <Route path="/store" element={<ProtectedRoute><CustomerStorePage /></ProtectedRoute>} />
+            <Route path="/orders" element={<ProtectedRoute><OrdersPage /></ProtectedRoute>} />
+            <Route path="/health-info" element={<ProtectedRoute><HealthInfoPage /></ProtectedRoute>} />
+
+            <Route path="/reports" element={<ProtectedRoute><ReportsPage /></ProtectedRoute>} />
+            <Route path="/notifications" element={<ProtectedRoute><NotificationsPage /></ProtectedRoute>} />
+            <Route path="/audit-logs" element={<ProtectedRoute><AuditLogsPage /></ProtectedRoute>} />
+            <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
+
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
+      </div>
+    </div>
+  );
+}
+
+export function App() {
   return (
     <AuthProvider>
       <PharmacyProvider>
         <CartProvider>
-          <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans">
-            <Navbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-
-            <div className="flex-1 flex">
-              <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-
-              <main className="flex-1 lg:pl-64 p-4 lg:p-8 transition-all duration-300">
-                <Routes>
-                  <Route path="/" element={<DashboardPage />} />
-                  <Route path="/inventory" element={<MedicinesPage />} />
-                  <Route path="/inventory/add" element={<MedicinesPage />} />
-                  <Route path="/inventory/stock-in" element={<StockInPage />} />
-                  <Route path="/inventory/low-stock" element={<LowStockPage />} />
-                  <Route path="/inventory/out-of-stock" element={<MedicinesPage />} />
-                  <Route path="/inventory/expiring-soon" element={<ExpiringSoonPage />} />
-                  <Route path="/inventory/expired" element={<ExpiredPage />} />
-
-                  <Route path="/sales/pos" element={<SalesPOSPage />} />
-                  <Route path="/sales/history" element={<SalesHistoryPage />} />
-
-                  <Route path="/purchases" element={<PurchasesPage />} />
-                  <Route path="/suppliers" element={<SuppliersPage />} />
-                  <Route path="/categories" element={<CategoriesPage />} />
-
-                  <Route path="/store" element={<CustomerStorePage />} />
-                  <Route path="/orders" element={<OrdersPage />} />
-                  <Route path="/health-info" element={<HealthInfoPage />} />
-
-                  <Route path="/reports" element={<ReportsPage />} />
-                  <Route path="/notifications" element={<NotificationsPage />} />
-                  <Route path="/audit-logs" element={<AuditLogsPage />} />
-                  <Route path="/settings" element={<SettingsPage />} />
-
-                  <Route path="*" element={<Navigate to="/" replace />} />
-                </Routes>
-              </main>
-            </div>
-          </div>
+          <Routes>
+            {/* Public route */}
+            <Route path="/login" element={<LoginPage />} />
+            {/* All other routes — protected inside AppShell */}
+            <Route path="/*" element={<AppShell />} />
+          </Routes>
         </CartProvider>
       </PharmacyProvider>
     </AuthProvider>
@@ -78,3 +98,4 @@ export function App() {
 }
 
 export default App;
+

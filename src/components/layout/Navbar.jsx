@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Search, Bell, ShoppingCart, UserCheck, Menu, X, Pill, AlertTriangle, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Search, Bell, ShoppingCart, UserCheck, Menu, X, Pill, AlertTriangle, ShieldCheck, ArrowRight, LogOut } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { usePharmacy } from '../../context/PharmacyContext';
 import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 
 export const Navbar = ({ onToggleSidebar }) => {
-  const { currentRole, user, switchRole, ROLES } = useAuth();
+  const { currentRole, user, switchRole, logout, ROLES } = useAuth();
   const { medicines, notifications, unreadNotificationsCount, markNotificationRead, markAllNotificationsRead } = usePharmacy();
   const { cart, setIsCartOpen } = useCart();
   const navigate = useNavigate();
@@ -260,18 +260,27 @@ export const Navbar = ({ onToggleSidebar }) => {
             )}
           </div>
 
-          {/* User Profile Avatar */}
-          <div className="hidden sm:flex items-center gap-2.5 pl-2 border-l border-slate-200">
-            <img
-              src={user.avatar}
-              alt={user.name}
-              className="w-8 h-8 rounded-full object-cover ring-2 ring-pharmacy-500/20"
-            />
-            <div className="text-left leading-tight hidden md:block">
-              <div className="text-xs font-bold text-slate-800 truncate max-w-[120px]">{user.name}</div>
-              <div className="text-[10px] text-pharmacy-600 font-semibold">{user.role}</div>
+          {/* User Profile Avatar + Logout */}
+          {user && (
+            <div className="hidden sm:flex items-center gap-2.5 pl-2 border-l border-slate-200">
+              <img
+                src={user.avatar}
+                alt={user.name}
+                className="w-8 h-8 rounded-full object-cover ring-2 ring-pharmacy-500/20"
+              />
+              <div className="text-left leading-tight hidden md:block">
+                <div className="text-xs font-bold text-slate-800 truncate max-w-[120px]">{user.name}</div>
+                <div className="text-[10px] text-pharmacy-600 font-semibold">{user.role}</div>
+              </div>
+              <button
+                onClick={async () => { await logout(); navigate('/login'); }}
+                title="Logout"
+                className="ml-1 p-1.5 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 transition"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </header>
